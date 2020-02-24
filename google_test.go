@@ -8,12 +8,20 @@ import (
 
 var dork *GoogleSearch
 
+func TestToUrl(t *testing.T) {
+	dork = &GoogleSearch{}
+
+	result := dork.Site("example.com").ToURL()
+
+	assert.Equal(t, result, "https://www.google.com/search?q=site%3Aexample.com", "they should be equal")
+}
+
 func TestSite(t *testing.T) {
 	dork = &GoogleSearch{}
 
 	result := dork.Site("example.com").ToString()
 
-	assert.Equal(t, result, "site:\"example.com\"", "they should be equal")
+	assert.Equal(t, result, "site:example.com", "they should be equal")
 }
 
 func TestIntext(t *testing.T) {
@@ -77,5 +85,5 @@ func TestOr(t *testing.T) {
 
 	result := dork.Site("facebook.com").Or().Site("twitter.com").ToString()
 
-	assert.Equal(t, result, "site:\"facebook.com\" OR site:\"twitter.com\"", "they should be equal")
+	assert.Equal(t, result, "site:facebook.com OR site:twitter.com", "they should be equal")
 }

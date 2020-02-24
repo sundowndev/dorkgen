@@ -1,8 +1,12 @@
 package dorkgen
 
-import "strings"
+import (
+	"net/url"
+	"strings"
+)
 
 const (
+	searchUrl = "https://www.google.com/search"
 	siteTag     = "site:"
 	urlTag      = "inurl:"
 	filetypeTag = "filetype:"
@@ -31,9 +35,23 @@ func (e *GoogleSearch) ToString() string {
 	return strings.Join(e.tags, " ")
 }
 
+// ToURL ...
+func (e *GoogleSearch) ToURL() string {
+	baseURL, _ := url.Parse(searchUrl)
+
+	tags := strings.Join(e.tags, " ")
+
+	params := url.Values{}
+	params.Add("q", tags)
+
+	baseURL.RawQuery = params.Encode()
+
+	return baseURL.String()
+}
+
 // Site ...
 func (e *GoogleSearch) Site(site string) *GoogleSearch {
-	e.tags = append(e.tags, concat(siteTag, site, true))
+	e.tags = append(e.tags, concat(siteTag, site, false))
 
 	return e
 }
