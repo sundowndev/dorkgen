@@ -1,11 +1,11 @@
 # Dorkgen
 
 <div align="left">
-  <a href="https://github.com/sundowndev/dorkgen/actions">
-    <img src="https://img.shields.io/endpoint.svg?url=https://actions-badge.atrox.dev/sundowndev/dorkgen/badge?ref=master" alt="build status" />
-  </a>
   <a href="https://godoc.org/github.com/sundowndev/dorkgen">
     <img src="https://godoc.org/github.com/sundowndev/dorkgen?status.svg" alt="GoDoc">
+  </a>
+  <a href="https://github.com/sundowndev/dorkgen/actions">
+    <img src="https://img.shields.io/endpoint.svg?url=https://actions-badge.atrox.dev/sundowndev/dorkgen/badge?ref=master" alt="build status" />
   </a>
   <a href="https://goreportcard.com/report/github.com/sundowndev/dorkgen">
     <img src="https://goreportcard.com/badge/github.com/sundowndev/dorkgen" alt="go report" />
@@ -15,9 +15,6 @@
   </a>
   <a href="https://github.com/sundowndev/dorkgen/releases">
     <img src="https://img.shields.io/github/release/SundownDEV/dorkgen.svg" alt="Latest version" />
-  </a>
-  <a href="https://github.com/sundowndev/dorkgen/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/sundowndev/dorkgen.svg" alt="License" />
   </a>
 </div>
 
@@ -62,6 +59,7 @@ func main() {
 type EngineFactory interface {
 	Site(string) *GoogleSearch
 	ToString() string
+	ToUrl() string
 	Intext(string) *GoogleSearch
 	Inurl(string) *GoogleSearch
 	Filetype(string) *GoogleSearch
