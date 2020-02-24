@@ -1,6 +1,7 @@
 package dorkgen
 
-// EngineFactory ...
+// EngineFactory is the main interface for
+// search engine implementations.
 type EngineFactory interface {
 	Site(string) *GoogleSearch
 	ToString() string

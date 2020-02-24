@@ -16,7 +16,7 @@ const (
 	excludeTag  = "-"
 )
 
-// GoogleSearch ...
+// GoogleSearch is the Google implementation for Dorkgen
 type GoogleSearch struct {
 	EngineFactory
 	tags []string
@@ -30,7 +30,7 @@ func concat(tag string, value string, quotes bool) string {
 	return tag + value
 }
 
-// ToString ...
+// ToString converts all tags to a single request
 func (e *GoogleSearch) ToString() string {
 	return strings.Join(e.tags, " ")
 }
