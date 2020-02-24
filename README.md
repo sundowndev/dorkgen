@@ -49,7 +49,7 @@ func main() {
   // site:"example.com" OR "06792489265"
 
   dork.Site("facebook.*").Exclude("site:facebook.com").ToUrl()
-  // https://www.google.com/search?q=site%3A"facebook.*"+-site%3Afacebook.com&oq=site%3A"facebook.*"+-site%3Afacebook.com
+  // https://www.google.com/search?q=site%3A"facebook.*"+-site%3Afacebook.com
 }
 ```
 
