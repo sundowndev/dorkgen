@@ -4,6 +4,9 @@
   <a href="https://github.com/sundowndev/dorkgen/actions">
     <img src="https://img.shields.io/endpoint.svg?url=https://actions-badge.atrox.dev/sundowndev/dorkgen/badge?ref=master" alt="build status" />
   </a>
+  <a href="https://godoc.org/github.com/sundowndev/dorkgen">
+    <img src="https://godoc.org/github.com/sundowndev/dorkgen?status.svg" alt="GoDoc">
+  </a>
   <a href="https://goreportcard.com/report/github.com/sundowndev/dorkgen">
     <img src="https://goreportcard.com/badge/github.com/sundowndev/dorkgen" alt="go report" />
   </a>
