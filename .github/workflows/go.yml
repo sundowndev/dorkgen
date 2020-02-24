@@ -29,7 +29,7 @@ jobs:
       run: go build -v .
 
     - name: Test
-    - uses: paambaati/codeclimate-action@v2.2.4
+      uses: paambaati/codeclimate-action@v2.2.4
       env:
         CC_TEST_REPORTER_ID: ca10efb872ac0b9f171627579f3e7675c4164454481835514091a1d4b901cb7d
       with:
