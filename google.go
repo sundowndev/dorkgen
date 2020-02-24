@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	searchUrl   = "https://www.google.com/search"
+	searchURL   = "https://www.google.com/search"
 	siteTag     = "site:"
 	urlTag      = "inurl:"
 	filetypeTag = "filetype:"
@@ -37,7 +37,7 @@ func (e *GoogleSearch) ToString() string {
 
 // ToURL ...
 func (e *GoogleSearch) ToURL() string {
-	baseURL, _ := url.Parse(searchUrl)
+	baseURL, _ := url.Parse(searchURL)
 
 	tags := strings.Join(e.tags, " ")
 
@@ -101,5 +101,11 @@ func (e *GoogleSearch) Ext(ext string) *GoogleSearch {
 // Exclude ...
 func (e *GoogleSearch) Exclude(value string) *GoogleSearch {
 	e.tags = append(e.tags, concat(excludeTag, value, false))
+	return e
+}
+
+// Group ...
+func (e *GoogleSearch) Group(value string) *GoogleSearch {
+	e.tags = append(e.tags, "("+value+")")
 	return e
 }
