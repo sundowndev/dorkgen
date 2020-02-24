@@ -38,10 +38,10 @@ import (
 )
 
 func main() {
-  dork := dorkgen.Google{}
-  // dork := dorkgen.DuckDuckGo{}
-  // dork := dorkgen.Bing{}
- 
+  dork := &dorkgen.Google{}
+  // dork := &dorkgen.DuckDuckGo{}
+  // dork := &dorkgen.Bing{}
+
   dork.Site("example.com").Intext("06792489265").ToString()
   // site:example.com "06792489265"
 
