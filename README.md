@@ -1,3 +1,70 @@
-# dorkgen
+# Dorkgen
 
-[PoC 1](https://carbon.now.sh/?bg=rgba(34%2C123%2C211%2C1)&t=one-dark&wt=none&l=text%2Fx-go&ds=true&dsyoff=0px&dsblur=9px&wc=true&wa=false&pv=56px&ph=56px&ln=true&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=package%2520main%250A%250Aimport%2520(%250A%2509%2522fmt%2522%250A%2520%2520%250A%2520%2520%2509%2522github.com%252Fsundowndev%252Fdorkgen%2522%250A)%250A%250Afunc%2520main()%2520%257B%250A%2520%2520dork%2520%253A%253D%2520dorkgen.Google%257B%257D%250A%2520%2520%252F%252F%2520dork%2520%253A%253D%2520dorkgen.DuckDuckGo%257B%257D%250A%2520%2520%252F%252F%2520dork%2520%253A%253D%2520dorkgen.Bing%257B%257D%250A%2520%250A%2520%2520dork.Site(%2522example.com%2522).Intext(%252206792489265%2522).ToString()%250A%2520%2520%252F%252F%2520output%253A%2520site%253Aexample.com%2520%252206792489265%2522%250A%250A%2520%2520dork.Site(%2522example.com%2522).Or().Intext(%252206792489265%2522).ToString()%250A%2520%2520%252F%252F%2520output%253A%2520site%253Aexample.com%2520OR%2520%252206792489265%2522%250A%250A%2520%2520dork.Site(%2522facebook.*%2522).Exclude().Site(%2522facebook.com%2522).ToString()%250A%2520%2520%252F%252F%2520output%253A%2520site%253Afacebook.*%2520-site%253Afacebook.com%250A%250A%2520%2520customDork%2520%253A%253D%2520dork.%250A%2520%2520%2520%2520Ext(%2522doc%2520%257C%2520pdf%2520%257C%2520xls%2520%257C%2520txt%2520%257C%2520xml%2522).%250A%2520%2520%2520%2520Intext(%2522confidential%2520salary%2520%257C%2520budget%2520approved%2522).%250A%2520%2520%2520%2520Inurl(%2522confidential%2522)%250A%2520%2520%252F%252F%2520output%253A%2520ext%253A(doc%2520%257C%2520pdf%2520%257C%2520xls%2520%257C%2520txt%2520%257C%2520xml)%2520(intext%253Aconfidential%2520salary%2520%257C%2520intext%253A%25E2%2580%259Dbudget%2520approved%25E2%2580%259D)%2520inurl%253Aconfidential%250A%250A%2520%2520customDork.ToUrl()%250A%2520%2520%252F%252F%2520output%253A%2520https%253A%252F%252Fwww.google.com%252Fsearch%253Fq%253Dext%25253A%252528doc%252B%25257C%252Bpdf%252B%25257C%252Bxls%252B%25257C%252Btxt%252B%25257C%252Bxml%252529%252B%252528intext%25253Aconfidential%252Bsalary%252B%25257C%252Bintext%25253A%2525E2%252580%25259Dbudget%252Bapproved%2525E2%252580%25259D%252529%252Binurl%25253Aconfidential%2526oq%253Dext%25253A%252528doc%252B%25257C%252Bpdf%252B%25257C%252Bxls%252B%25257C%252Btxt%252B%25257C%252Bxml%252529%252B%252528intext%25253Aconfidential%252Bsalary%252B%25257C%252Bintext%25253A%2525E2%252580%25259Dbudget%252Bapproved%2525E2%252580%25259D%252529%252Binurl%25253Aconfidential%250A%257D)
+<div align="center">
+  <a href="https://github.com/sundowndev/dorkgen/actions">
+    <img src="https://img.shields.io/endpoint.svg?url=https://actions-badge.atrox.dev/sundowndev/dorkgen/badge?ref=master" alt="build status" />
+  </a>
+  <a href="https://goreportcard.com/report/github.com/sundowndev/dorkgen">
+    <img src="https://goreportcard.com/badge/github.com/sundowndev/dorkgen" alt="go report" />
+  </a>
+  <a href="https://codeclimate.com/github/sundowndev/dorkgen/maintainability">
+    <img src="https://api.codeclimate.com/v1/badges/3259feb1c68df1cd4f71/maintainability" />
+  </a>
+  <a href="https://github.com/sundowndev/dorkgen/releases">
+    <img src="https://img.shields.io/github/release/SundownDEV/dorkgen.svg" alt="Latest version" />
+  </a>
+  <a href="https://github.com/sundowndev/dorkgen/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/sundowndev/dorkgen.svg" alt="License" />
+  </a>
+</div>
+
+Dorkgen is a dork request generator for popular search engines such as Google, DuckDuckGo and Bing. [Learn more about Google Hacking](https://en.wikipedia.org/wiki/Google_hacking).
+
+## Install
+
+```bash
+go get github.com/sundowndev/dorkgen
+```
+
+## Usage
+
+```go
+package main
+
+import (
+	"fmt"
+  
+  	"github.com/sundowndev/dorkgen"
+)
+
+func main() {
+  dork := dorkgen.Google{}
+  // dork := dorkgen.DuckDuckGo{}
+  // dork := dorkgen.Bing{}
+ 
+  dork.Site("example.com").Intext("06792489265").ToString()
+  // site:"example.com" "06792489265"
+
+  dork.Site("example.com").Or().Intext("06792489265").ToString()
+  // site:"example.com" OR "06792489265"
+
+  dork.Site("facebook.*").Exclude("site:facebook.com").ToUrl()
+  // https://www.google.com/search?q=site%3A"facebook.*"+-site%3Afacebook.com&oq=site%3A"facebook.*"+-site%3Afacebook.com
+}
+```
+
+## API
+
+```go
+type EngineFactory interface {
+	Site(string) *GoogleSearch
+	ToString() string
+	Intext(string) *GoogleSearch
+	Inurl(string) *GoogleSearch
+	Filetype(string) *GoogleSearch
+	Cache(string) *GoogleSearch
+	Related(string) *GoogleSearch
+	Ext(string) *GoogleSearch
+	Exclude(string) *GoogleSearch
+}
+```
