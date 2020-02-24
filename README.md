@@ -1,14 +1,17 @@
 # Dorkgen
 
-<div align="center">
+<div align="left">
   <a href="https://github.com/sundowndev/dorkgen/actions">
     <img src="https://img.shields.io/endpoint.svg?url=https://actions-badge.atrox.dev/sundowndev/dorkgen/badge?ref=master" alt="build status" />
+  </a>
+  <a href="https://godoc.org/github.com/sundowndev/dorkgen">
+    <img src="https://godoc.org/github.com/sundowndev/dorkgen?status.svg" alt="GoDoc">
   </a>
   <a href="https://goreportcard.com/report/github.com/sundowndev/dorkgen">
     <img src="https://goreportcard.com/badge/github.com/sundowndev/dorkgen" alt="go report" />
   </a>
   <a href="https://codeclimate.com/github/sundowndev/dorkgen/maintainability">
-    <img src="https://api.codeclimate.com/v1/badges/3259feb1c68df1cd4f71/maintainability" />
+    <img src="https://api.codeclimate.com/v1/badges/e827d7cc994c6519d319/maintainability" />
   </a>
   <a href="https://github.com/sundowndev/dorkgen/releases">
     <img src="https://img.shields.io/github/release/SundownDEV/dorkgen.svg" alt="Latest version" />
@@ -43,10 +46,10 @@ func main() {
   // dork := dorkgen.Bing{}
  
   dork.Site("example.com").Intext("06792489265").ToString()
-  // site:"example.com" "06792489265"
+  // site:example.com "06792489265"
 
   dork.Site("example.com").Or().Intext("06792489265").ToString()
-  // site:"example.com" OR "06792489265"
+  // site:example.com OR "06792489265"
 
   dork.Site("facebook.*").Exclude("site:facebook.com").ToUrl()
   // https://www.google.com/search?q=site%3A"facebook.*"+-site%3Afacebook.com
