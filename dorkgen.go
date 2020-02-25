@@ -5,7 +5,7 @@ package dorkgen
 type EngineFactory interface {
 	Site(string) *GoogleSearch
 	ToString() string
-	ToUrl() string
+	ToURL() string
 	Intext(string) *GoogleSearch
 	Inurl(string) *GoogleSearch
 	Filetype(string) *GoogleSearch
