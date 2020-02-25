@@ -31,25 +31,21 @@ go get github.com/sundowndev/dorkgen
 ```go
 package main
 
-import (
-	"fmt"
-  
-  	"github.com/sundowndev/dorkgen"
-)
+import "github.com/sundowndev/dorkgen"
 
 func main() {
-  dork := &dorkgen.Google{}
+  dork := &dorkgen.GoogleSearch{}
   // dork := &dorkgen.DuckDuckGo{}
   // dork := &dorkgen.Bing{}
 
   dork.Site("example.com").Intext("06792489265").ToString()
-  // site:example.com "06792489265"
+  // returns: site:example.com "06792489265"
 
   dork.Site("example.com").Or().Intext("06792489265").ToString()
-  // site:example.com OR "06792489265"
+  // returns: site:example.com OR "06792489265"
 
-  dork.Site("facebook.*").Exclude("site:facebook.com").ToUrl()
-  // https://www.google.com/search?q=site%3A"facebook.*"+-site%3Afacebook.com
+  dork.Site("facebook.*").Exclude("site:facebook.com").ToURL()
+  // returns: https://www.google.com/search?q=site%3A"facebook.*"+-site%3Afacebook.com
 }
 ```
 
@@ -57,15 +53,15 @@ func main() {
 
 ```go
 type EngineFactory interface {
-	Site(string) *GoogleSearch
-	ToString() string
-	ToUrl() string
-	Intext(string) *GoogleSearch
-	Inurl(string) *GoogleSearch
-	Filetype(string) *GoogleSearch
-	Cache(string) *GoogleSearch
-	Related(string) *GoogleSearch
-	Ext(string) *GoogleSearch
-	Exclude(string) *GoogleSearch
+  Site(string) *GoogleSearch
+  ToString() string
+  ToURL() string
+  Intext(string) *GoogleSearch
+  Inurl(string) *GoogleSearch
+  Filetype(string) *GoogleSearch
+  Cache(string) *GoogleSearch
+  Related(string) *GoogleSearch
+  Ext(string) *GoogleSearch
+  Exclude(string) *GoogleSearch
 }
 ```
