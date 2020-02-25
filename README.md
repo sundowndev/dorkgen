@@ -28,6 +28,10 @@ go get github.com/sundowndev/dorkgen
 
 ## Usage
 
+[Try it in the Go playground](https://play.golang.org/p/ck_hEoX8cTK)
+
+#### Get started
+
 ```go
 package main
 
@@ -38,30 +42,52 @@ func main() {
   // dork := &dorkgen.DuckDuckGo{}
   // dork := &dorkgen.Bing{}
 
-  dork.Site("example.com").Intext("06792489265").ToString()
-  // returns: site:example.com "06792489265"
-
-  dork.Site("example.com").Or().Intext("06792489265").ToString()
-  // returns: site:example.com OR "06792489265"
-
-  dork.Site("facebook.*").Exclude("site:facebook.com").ToURL()
-  // returns: https://www.google.com/search?q=site%3A"facebook.*"+-site%3Afacebook.com
+  dork.Site("example.com").Intext("text").ToString()
+  // returns: site:example.com "text"
 }
 ```
 
-## API
+#### Operators
 
 ```go
-type EngineFactory interface {
-  Site(string) *GoogleSearch
-  ToString() string
-  ToURL() string
-  Intext(string) *GoogleSearch
-  Inurl(string) *GoogleSearch
-  Filetype(string) *GoogleSearch
-  Cache(string) *GoogleSearch
-  Related(string) *GoogleSearch
-  Ext(string) *GoogleSearch
-  Exclude(string) *GoogleSearch
+dork.Site("facebook.com").Or().Site("twitter.com").ToString()
+// returns: site:facebook.com OR site:twitter.com
+
+dork.Intext("facebook").And().Intext("twitter").ToString()
+// returns: "facebook" AND "twitter"
+```
+
+#### Exclude results
+
+```go
+dork.
+  Exclude((&dorkgen.GoogleSearch{}).
+    Site("example.com").
+    ToString()).
+  Site("example.*").
+  Or().
+  Intext("text")
+// returns: -site:example.com site:example.* OR "text"
+```
+
+#### Group tags along with operators
+
+```go
+  dork.
+    Group((&dorkgen.GoogleSearch{}).
+      Site("facebook.com").
+      Or().
+      Site("twitter.com").
+      ToString()).
+    Intext("wtf").
+    ToString()
+  // returns: (site:facebook.com OR site:twitter.com) "wtf"
 }
+```
+
+#### URL conversion
+
+```go
+dork.Site("facebook.*").Exclude("site:facebook.com").ToURL()
+// returns: https://www.google.com/search?q=site%3A"facebook.*"+-site%3Afacebook.com
 ```
