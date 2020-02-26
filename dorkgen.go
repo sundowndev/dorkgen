@@ -13,4 +13,5 @@ type EngineFactory interface {
 	Related(string) *GoogleSearch
 	Ext(string) *GoogleSearch
 	Exclude(string) *GoogleSearch
+	Group(string) *GoogleSearch
 }
