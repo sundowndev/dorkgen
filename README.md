@@ -13,6 +13,9 @@
   <a href="https://codeclimate.com/github/sundowndev/dorkgen/maintainability">
     <img src="https://api.codeclimate.com/v1/badges/e827d7cc994c6519d319/maintainability" />
   </a>
+  <a href="https://codecov.io/gh/sundowndev/dorkgen">
+    <img src="https://codecov.io/gh/sundowndev/dorkgen/branch/master/graph/badge.svg" />
+  </a>
   <a href="https://github.com/sundowndev/dorkgen/releases">
     <img src="https://img.shields.io/github/release/SundownDEV/dorkgen.svg" alt="Latest version" />
   </a>
