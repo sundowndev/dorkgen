@@ -33,9 +33,8 @@ jobs:
         $(gofmt -l .) || (gofmt -d .; exit 1)
         
     - name: Test & publish code coverage
-      uses: paambaati/codeclimate-action@v2.4.0
       env:
-        CC_TEST_REPORTER_ID: ca10efb872ac0b9f171627579f3e7675c4164454481835514091a1d4b901cb7d
-      with:
-        coverageCommand: go test -coverprofile=c.out -v ./...
-        debug: true
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      run: |
+        go test -race -coverprofile=coverage.txt -covermode=atomic
+        bash <(curl -s https://codecov.io/bash)
