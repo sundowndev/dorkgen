@@ -14,11 +14,12 @@ const (
 	relatedTag  = "related:"
 	extTag      = "ext:"
 	excludeTag  = "-"
+	intitleTag  = "intitle:"
 )
 
 // GoogleSearch is the Google implementation for Dorkgen
 type GoogleSearch struct {
-	EngineFactory
+	engineFactory
 	tags []string
 }
 
@@ -107,5 +108,11 @@ func (e *GoogleSearch) Exclude(value string) *GoogleSearch {
 // Group ...
 func (e *GoogleSearch) Group(value string) *GoogleSearch {
 	e.tags = append(e.tags, "("+value+")")
+	return e
+}
+
+// Intitle ...
+func (e *GoogleSearch) Intitle(value string) *GoogleSearch {
+	e.tags = append(e.tags, concat(intitleTag, value, true))
 	return e
 }
