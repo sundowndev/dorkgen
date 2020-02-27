@@ -91,6 +91,14 @@ dork.
 #### URL conversion
 
 ```go
-dork.Site("facebook.*").Exclude("site:facebook.com").ToURL()
+dork.
+  Site("facebook.*").
+  Exclude((&dorkgen.GoogleSearch{}).
+    Site("facebook.com").
+    ToString())
+
+dork.ToString()
+// returns: site:facebook.* -site:facebook.com
+dork.ToURL()
 // returns: https://www.google.com/search?q=site%3A"facebook.*"+-site%3Afacebook.com
 ```
