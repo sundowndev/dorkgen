@@ -100,5 +100,5 @@ dork.
 dork.ToString()
 // returns: site:facebook.* -site:facebook.com
 dork.ToURL()
-// returns: https://www.google.com/search?q=site%3A"facebook.*"+-site%3Afacebook.com
+// returns: https://www.google.com/search?q=site%3Afacebook.%2A+-site%3Afacebook.com
 ```
