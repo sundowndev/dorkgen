@@ -36,7 +36,7 @@ func (e *GoogleSearch) ToString() string {
 	return strings.Join(e.tags, " ")
 }
 
-// ToURL ...
+// ToURL converts tags to an encoded Google Search URL
 func (e *GoogleSearch) ToURL() string {
 	baseURL, _ := url.Parse(searchURL)
 
@@ -50,68 +50,68 @@ func (e *GoogleSearch) ToURL() string {
 	return baseURL.String()
 }
 
-// Site ...
+// Site specifically searches that particular site and lists all the results for that site.
 func (e *GoogleSearch) Site(site string) *GoogleSearch {
 	e.tags = append(e.tags, concat(siteTag, site, false))
 
 	return e
 }
 
-// Or ...
+// Or puts an OR operator in the request
 func (e *GoogleSearch) Or() *GoogleSearch {
 	e.tags = append(e.tags, "OR")
 	return e
 }
 
-// Intext ...
+// Intext searches for the occurrences of keywords all at once or one at a time.
 func (e *GoogleSearch) Intext(text string) *GoogleSearch {
 	e.tags = append(e.tags, concat("", text, true))
 	return e
 }
 
-// Inurl ...
+// Inurl searches for a URL matching one of the keywords.
 func (e *GoogleSearch) Inurl(url string) *GoogleSearch {
 	e.tags = append(e.tags, concat(urlTag, url, true))
 	return e
 }
 
-// Filetype ...
+// Filetype searches for a particular filetype mentioned in the query.
 func (e *GoogleSearch) Filetype(filetype string) *GoogleSearch {
 	e.tags = append(e.tags, concat(filetypeTag, filetype, true))
 	return e
 }
 
-// Cache ...
+// Cache shows the version of the web page that Google has in its cache.
 func (e *GoogleSearch) Cache(url string) *GoogleSearch {
 	e.tags = append(e.tags, concat(cacheTag, url, true))
 	return e
 }
 
-// Related ...
+// Related list web pages that are “similar” to a specified web page.
 func (e *GoogleSearch) Related(url string) *GoogleSearch {
 	e.tags = append(e.tags, concat(relatedTag, url, true))
 	return e
 }
 
-// Ext ...
+// Ext searches for a particular file extension mentioned in the query.
 func (e *GoogleSearch) Ext(ext string) *GoogleSearch {
 	e.tags = append(e.tags, concat(extTag, ext, false))
 	return e
 }
 
-// Exclude ...
+// Exclude excludes some results.
 func (e *GoogleSearch) Exclude(value string) *GoogleSearch {
 	e.tags = append(e.tags, concat(excludeTag, value, false))
 	return e
 }
 
-// Group ...
+// Group isolate tags between parentheses.
 func (e *GoogleSearch) Group(value string) *GoogleSearch {
 	e.tags = append(e.tags, "("+value+")")
 	return e
 }
 
-// Intitle ...
+// Intitle searches for occurrences of keywords in title all or one.
 func (e *GoogleSearch) Intitle(value string) *GoogleSearch {
 	e.tags = append(e.tags, concat(intitleTag, value, true))
 	return e
