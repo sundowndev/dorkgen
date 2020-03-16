@@ -15,7 +15,7 @@ const (
 	extTag      = "ext:"
 	excludeTag  = "-"
 	intitleTag  = "intitle:"
-	intextTag  = "intext:"
+	intextTag   = "intext:"
 )
 
 // GoogleSearch is the Google implementation for Dorkgen
