@@ -38,7 +38,7 @@ func TestInit(t *testing.T) {
 			Intext("text").
 			ToString()
 
-		assert.Equal(result, "\"text\"", "they should be equal")
+		assert.Equal(result, "intext:\"text\"", "they should be equal")
 	})
 
 	t.Run("should handle inurl tag correctly", func(t *testing.T) {
@@ -51,7 +51,7 @@ func TestInit(t *testing.T) {
 		assert.Equal(result, "inurl:\"index.php\"", "they should be equal")
 	})
 
-	t.Run("should handle rrrrr tag correctly", func(t *testing.T) {
+	t.Run("should handle filetype tag correctly", func(t *testing.T) {
 		dork = &GoogleSearch{}
 
 		result := dork.
@@ -124,10 +124,10 @@ func TestInit(t *testing.T) {
 			Group((&GoogleSearch{}).Intext("1").Or().Intext("2").ToString()).
 			ToString()
 
-		assert.Equal(result, "site:linkedin.com (\"1\" OR \"2\")", "they should be equal")
+		assert.Equal(result, "site:linkedin.com (intext:\"1\" OR intext:\"2\")", "they should be equal")
 	})
 
-	t.Run("should handle rrrrr tag correctly", func(t *testing.T) {
+	t.Run("should handle group tag correctly", func(t *testing.T) {
 		dork = &GoogleSearch{}
 
 		result := dork.
@@ -136,6 +136,6 @@ func TestInit(t *testing.T) {
 			Intitle("jordan").
 			ToString()
 
-		assert.Equal(result, "site:linkedin.com (\"1\" OR \"2\") intitle:\"jordan\"", "they should be equal")
+		assert.Equal(result, "site:linkedin.com (intext:\"1\" OR intext:\"2\") intitle:\"jordan\"", "they should be equal")
 	})
 }
