@@ -15,6 +15,7 @@ const (
 	extTag      = "ext:"
 	excludeTag  = "-"
 	intitleTag  = "intitle:"
+	intextTag  = "intext:"
 )
 
 // GoogleSearch is the Google implementation for Dorkgen
@@ -65,7 +66,7 @@ func (e *GoogleSearch) Or() *GoogleSearch {
 
 // Intext searches for the occurrences of keywords all at once or one at a time.
 func (e *GoogleSearch) Intext(text string) *GoogleSearch {
-	e.tags = append(e.tags, concat("", text, true))
+	e.tags = append(e.tags, concat(intextTag, text, true))
 	return e
 }
 
