@@ -46,7 +46,7 @@ func main() {
   // dork := &dorkgen.Bing{}
 
   dork.Site("example.com").Intext("text").ToString()
-  // returns: site:example.com "text"
+  // returns: site:example.com intext:"text"
 }
 ```
 
@@ -57,7 +57,7 @@ dork.Site("facebook.com").Or().Site("twitter.com").ToString()
 // returns: site:facebook.com OR site:twitter.com
 
 dork.Intext("facebook").And().Intext("twitter").ToString()
-// returns: "facebook" AND "twitter"
+// returns: intext:"facebook" AND intext:"twitter"
 ```
 
 #### Exclude results
