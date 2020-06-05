@@ -102,3 +102,9 @@ dork.ToString()
 dork.ToURL()
 // returns: https://www.google.com/search?q=site%3Afacebook.%2A+-site%3Afacebook.com
 ```
+
+## Support
+
+[![](docs/jetbrains.svg)](https://www.jetbrains.com/?from=sundowndev)
+
+Thanks to [JetBrains](https://www.jetbrains.com/?from=sundowndev) for supporting my open-source projects.
