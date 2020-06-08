@@ -53,29 +53,46 @@ func main() {
 #### Operators
 
 ```go
-dork.Site("facebook.com").Or().Site("twitter.com").ToString()
-// returns: site:facebook.com OR site:twitter.com
+package main
 
-dork.Intext("facebook").And().Intext("twitter").ToString()
-// returns: intext:"facebook" AND intext:"twitter"
+import "github.com/sundowndev/dorkgen"
+
+func main() {
+  dork.Site("facebook.com").Or().Site("twitter.com").ToString()
+  // returns: site:facebook.com OR site:twitter.com
+
+  dork.Intext("facebook").And().Intext("twitter").ToString()
+  // returns: intext:"facebook" AND intext:"twitter"
+}
 ```
 
 #### Exclude results
 
 ```go
-dork.
-  Exclude((&dorkgen.GoogleSearch{}).
-    Site("example.com").
-    ToString()).
-  Site("example.*").
-  Or().
-  Intext("text")
-// returns: -site:example.com site:example.* OR "text"
+package main
+
+import "github.com/sundowndev/dorkgen"
+
+func main() {
+  dork.
+    Exclude((&dorkgen.GoogleSearch{}).
+      Site("example.com").
+      ToString()).
+    Site("example.*").
+    Or().
+    Intext("text")
+  // returns: -site:example.com site:example.* OR "text"
+}
 ```
 
 #### Group tags along with operators
 
 ```go
+package main
+
+import "github.com/sundowndev/dorkgen"
+
+func main() {
   dork.
     Group((&dorkgen.GoogleSearch{}).
       Site("facebook.com").
@@ -91,16 +108,22 @@ dork.
 #### URL conversion
 
 ```go
-dork.
-  Site("facebook.*").
-  Exclude((&dorkgen.GoogleSearch{}).
-    Site("facebook.com").
-    ToString())
+package main
 
-dork.ToString()
-// returns: site:facebook.* -site:facebook.com
-dork.ToURL()
-// returns: https://www.google.com/search?q=site%3Afacebook.%2A+-site%3Afacebook.com
+import "github.com/sundowndev/dorkgen"
+
+func main() {
+  dork.
+    Site("facebook.*").
+    Exclude((&dorkgen.GoogleSearch{}).
+      Site("facebook.com").
+      ToString())
+
+  dork.ToString()
+  // returns: site:facebook.* -site:facebook.com
+  dork.ToURL()
+  // returns: https://www.google.com/search?q=site%3Afacebook.%2A+-site%3Afacebook.com
+}
 ```
 
 ## Support
