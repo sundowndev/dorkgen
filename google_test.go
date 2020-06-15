@@ -1,15 +1,16 @@
 package dorkgen
 
 import (
+	"fmt"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	assertion "github.com/stretchr/testify/assert"
 )
 
 var dork *GoogleSearch
 
 func TestInit(t *testing.T) {
-	assert := assert.New(t)
+	assert := assertion.New(t)
 
 	t.Run("should convert to URL correctly", func(t *testing.T) {
 		dork = &GoogleSearch{}
@@ -21,12 +22,20 @@ func TestInit(t *testing.T) {
 		assert.Equal(result, "https://www.google.com/search?q=site%3Aexample.com", "they should be equal")
 	})
 
+	t.Run("should convert to string correctly", func(t *testing.T) {
+		dork = &GoogleSearch{}
+
+		result := fmt.Sprint(dork.Site("example.com"))
+
+		assert.Equal(result, "site:example.com", "they should be equal")
+	})
+
 	t.Run("should handle site tag correctly", func(t *testing.T) {
 		dork = &GoogleSearch{}
 
 		result := dork.
 			Site("example.com").
-			ToString()
+			String()
 
 		assert.Equal(result, "site:example.com", "they should be equal")
 	})
@@ -36,7 +45,7 @@ func TestInit(t *testing.T) {
 
 		result := dork.
 			Intext("text").
-			ToString()
+			String()
 
 		assert.Equal(result, "intext:\"text\"", "they should be equal")
 	})
@@ -46,7 +55,7 @@ func TestInit(t *testing.T) {
 
 		result := dork.
 			Inurl("index.php").
-			ToString()
+			String()
 
 		assert.Equal(result, "inurl:\"index.php\"", "they should be equal")
 	})
@@ -56,7 +65,7 @@ func TestInit(t *testing.T) {
 
 		result := dork.
 			Filetype("pdf").
-			ToString()
+			String()
 
 		assert.Equal(result, "filetype:\"pdf\"", "they should be equal")
 	})
@@ -66,7 +75,7 @@ func TestInit(t *testing.T) {
 
 		result := dork.
 			Cache("www.google.com").
-			ToString()
+			String()
 
 		assert.Equal(result, "cache:\"www.google.com\"", "they should be equal")
 	})
@@ -76,7 +85,7 @@ func TestInit(t *testing.T) {
 
 		result := dork.
 			Related("www.google.com").
-			ToString()
+			String()
 
 		assert.Equal(result, "related:\"www.google.com\"", "they should be equal")
 	})
@@ -86,7 +95,7 @@ func TestInit(t *testing.T) {
 
 		result := dork.
 			Ext("(doc | pdf | xls | txt | xml)").
-			ToString()
+			String()
 
 		assert.Equal(result, "ext:(doc | pdf | xls | txt | xml)", "they should be equal")
 	})
@@ -99,7 +108,7 @@ func TestInit(t *testing.T) {
 			Exclude("htm").
 			Exclude("php").
 			Exclude("md5sums").
-			ToString()
+			String()
 
 		assert.Equal(result, "-html -htm -php -md5sums", "they should be equal")
 	})
@@ -111,7 +120,7 @@ func TestInit(t *testing.T) {
 			Site("facebook.com").
 			Or().
 			Site("twitter.com").
-			ToString()
+			String()
 
 		assert.Equal(result, "site:facebook.com OR site:twitter.com", "they should be equal")
 	})
@@ -121,8 +130,8 @@ func TestInit(t *testing.T) {
 
 		result := dork.
 			Site("linkedin.com").
-			Group((&GoogleSearch{}).Intext("1").Or().Intext("2").ToString()).
-			ToString()
+			Group((&GoogleSearch{}).Intext("1").Or().Intext("2")).
+			String()
 
 		assert.Equal(result, "site:linkedin.com (intext:\"1\" OR intext:\"2\")", "they should be equal")
 	})
@@ -132,9 +141,9 @@ func TestInit(t *testing.T) {
 
 		result := dork.
 			Site("linkedin.com").
-			Group((&GoogleSearch{}).Intext("1").Or().Intext("2").ToString()).
+			Group((&GoogleSearch{}).Intext("1").Or().Intext("2")).
 			Intitle("jordan").
-			ToString()
+			String()
 
 		assert.Equal(result, "site:linkedin.com (intext:\"1\" OR intext:\"2\") intitle:\"jordan\"", "they should be equal")
 	})
