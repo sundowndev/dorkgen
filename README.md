@@ -23,6 +23,8 @@
 
 Dorkgen is a dork request generator for popular search engines such as Google, DuckDuckGo and Bing. [Learn more about Google Hacking](https://en.wikipedia.org/wiki/Google_hacking).
 
+**For now, only Google is supported.**
+
 ## Install
 
 ```bash
@@ -53,10 +55,6 @@ func main() {
 #### Operators
 
 ```go
-package main
-
-import "github.com/sundowndev/dorkgen"
-
 func main() {
   dork.Site("facebook.com").Or().Site("twitter.com").ToString()
   // returns: site:facebook.com OR site:twitter.com
@@ -69,10 +67,6 @@ func main() {
 #### Exclude results
 
 ```go
-package main
-
-import "github.com/sundowndev/dorkgen"
-
 func main() {
   dork.
     Exclude((&dorkgen.GoogleSearch{}).
@@ -88,10 +82,6 @@ func main() {
 #### Group tags along with operators
 
 ```go
-package main
-
-import "github.com/sundowndev/dorkgen"
-
 func main() {
   dork.
     Group((&dorkgen.GoogleSearch{}).
@@ -108,10 +98,6 @@ func main() {
 #### URL conversion
 
 ```go
-package main
-
-import "github.com/sundowndev/dorkgen"
-
 func main() {
   dork.
     Site("facebook.*").
