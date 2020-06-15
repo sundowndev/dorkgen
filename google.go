@@ -23,6 +23,10 @@ type GoogleSearch struct {
 	EngineFactory
 }
 
+func NewGoogleSearch() *GoogleSearch {
+	return &GoogleSearch{}
+}
+
 // String converts all tags to a single request
 func (e *GoogleSearch) String() string {
 	return strings.Join(e.tags, " ")

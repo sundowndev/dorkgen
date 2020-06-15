@@ -13,7 +13,7 @@ func TestInit(t *testing.T) {
 	assert := assertion.New(t)
 
 	t.Run("should convert to URL correctly", func(t *testing.T) {
-		dork = &GoogleSearch{}
+		dork = NewGoogleSearch()
 
 		result := dork.
 			Site("example.com").
@@ -23,7 +23,7 @@ func TestInit(t *testing.T) {
 	})
 
 	t.Run("should convert to string correctly", func(t *testing.T) {
-		dork = &GoogleSearch{}
+		dork = NewGoogleSearch()
 
 		result := fmt.Sprint(dork.Site("example.com"))
 
@@ -31,7 +31,7 @@ func TestInit(t *testing.T) {
 	})
 
 	t.Run("should handle site tag correctly", func(t *testing.T) {
-		dork = &GoogleSearch{}
+		dork = NewGoogleSearch()
 
 		result := dork.
 			Site("example.com").
@@ -41,7 +41,7 @@ func TestInit(t *testing.T) {
 	})
 
 	t.Run("should handle intext tag correctly", func(t *testing.T) {
-		dork = &GoogleSearch{}
+		dork = NewGoogleSearch()
 
 		result := dork.
 			Intext("text").
@@ -51,7 +51,7 @@ func TestInit(t *testing.T) {
 	})
 
 	t.Run("should handle inurl tag correctly", func(t *testing.T) {
-		dork = &GoogleSearch{}
+		dork = NewGoogleSearch()
 
 		result := dork.
 			Inurl("index.php").
@@ -61,7 +61,7 @@ func TestInit(t *testing.T) {
 	})
 
 	t.Run("should handle filetype tag correctly", func(t *testing.T) {
-		dork = &GoogleSearch{}
+		dork = NewGoogleSearch()
 
 		result := dork.
 			Filetype("pdf").
@@ -71,7 +71,7 @@ func TestInit(t *testing.T) {
 	})
 
 	t.Run("should handle cache tag correctly", func(t *testing.T) {
-		dork = &GoogleSearch{}
+		dork = NewGoogleSearch()
 
 		result := dork.
 			Cache("www.google.com").
@@ -81,7 +81,7 @@ func TestInit(t *testing.T) {
 	})
 
 	t.Run("should handle related tag correctly", func(t *testing.T) {
-		dork = &GoogleSearch{}
+		dork = NewGoogleSearch()
 
 		result := dork.
 			Related("www.google.com").
@@ -91,7 +91,7 @@ func TestInit(t *testing.T) {
 	})
 
 	t.Run("should handle ext tag correctly", func(t *testing.T) {
-		dork = &GoogleSearch{}
+		dork = NewGoogleSearch()
 
 		result := dork.
 			Ext("(doc | pdf | xls | txt | xml)").
@@ -101,7 +101,7 @@ func TestInit(t *testing.T) {
 	})
 
 	t.Run("should handle exclude tag correctly", func(t *testing.T) {
-		dork = &GoogleSearch{}
+		dork = NewGoogleSearch()
 
 		result := dork.
 			Exclude("html").
@@ -114,7 +114,7 @@ func TestInit(t *testing.T) {
 	})
 
 	t.Run("should handle or tag correctly", func(t *testing.T) {
-		dork = &GoogleSearch{}
+		dork = NewGoogleSearch()
 
 		result := dork.
 			Site("facebook.com").
@@ -126,22 +126,22 @@ func TestInit(t *testing.T) {
 	})
 
 	t.Run("should handle group tag correctly", func(t *testing.T) {
-		dork = &GoogleSearch{}
+		dork = NewGoogleSearch()
 
 		result := dork.
 			Site("linkedin.com").
-			Group((&GoogleSearch{}).Intext("1").Or().Intext("2")).
+			Group((NewGoogleSearch()).Intext("1").Or().Intext("2")).
 			String()
 
 		assert.Equal(result, "site:linkedin.com (intext:\"1\" OR intext:\"2\")", "they should be equal")
 	})
 
 	t.Run("should handle group tag correctly", func(t *testing.T) {
-		dork = &GoogleSearch{}
+		dork = NewGoogleSearch()
 
 		result := dork.
 			Site("linkedin.com").
-			Group((&GoogleSearch{}).Intext("1").Or().Intext("2")).
+			Group((NewGoogleSearch()).Intext("1").Or().Intext("2")).
 			Intitle("jordan").
 			String()
 
