@@ -23,8 +23,12 @@ type GoogleSearch struct {
 	EngineFactory
 }
 
-// ToString converts all tags to a single request
-func (e *GoogleSearch) ToString() string {
+func NewGoogleSearch() *GoogleSearch {
+	return &GoogleSearch{}
+}
+
+// String converts all tags to a single request
+func (e *GoogleSearch) String() string {
 	return strings.Join(e.tags, " ")
 }
 
@@ -96,9 +100,9 @@ func (e *GoogleSearch) Exclude(value string) *GoogleSearch {
 	return e
 }
 
-// Group isolate tags between parentheses.
-func (e *GoogleSearch) Group(value string) *GoogleSearch {
-	e.tags = append(e.tags, "("+value+")")
+// Group isolate tags between parentheses
+func (e *GoogleSearch) Group(tags *GoogleSearch) *GoogleSearch {
+	e.tags = append(e.tags, "("+tags.String()+")")
 	return e
 }
 
