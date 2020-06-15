@@ -43,11 +43,11 @@ package main
 import "github.com/sundowndev/dorkgen"
 
 func main() {
-  dork := &dorkgen.GoogleSearch{}
-  // dork := &dorkgen.DuckDuckGo{}
-  // dork := &dorkgen.Bing{}
+  dork := dorkgen.NewGoogleSearch()
+  // dork := dorkgen.NewDuckDuckGo()
+  // dork := dorkgen.NewBing()
 
-  dork.Site("example.com").Intext("text").ToString()
+  dork.Site("example.com").Intext("text").String()
   // returns: site:example.com intext:"text"
 }
 ```
@@ -56,10 +56,10 @@ func main() {
 
 ```go
 func main() {
-  dork.Site("facebook.com").Or().Site("twitter.com").ToString()
+  dork.Site("facebook.com").Or().Site("twitter.com").String()
   // returns: site:facebook.com OR site:twitter.com
 
-  dork.Intext("facebook").And().Intext("twitter").ToString()
+  dork.Intext("facebook").And().Intext("twitter").String()
   // returns: intext:"facebook" AND intext:"twitter"
 }
 ```
@@ -69,9 +69,9 @@ func main() {
 ```go
 func main() {
   dork.
-    Exclude((&dorkgen.GoogleSearch{}).
+    Exclude((dorkgen.NewGoogleSearch()).
       Site("example.com").
-      ToString()).
+      String()).
     Site("example.*").
     Or().
     Intext("text")
@@ -84,13 +84,12 @@ func main() {
 ```go
 func main() {
   dork.
-    Group((&dorkgen.GoogleSearch{}).
+    Group((dorkgen.NewGoogleSearch()).
       Site("facebook.com").
       Or().
-      Site("twitter.com").
-      ToString()).
+      Site("twitter.com")).
     Intext("wtf").
-    ToString()
+    String()
   // returns: (site:facebook.com OR site:twitter.com) "wtf"
 }
 ```
@@ -101,11 +100,11 @@ func main() {
 func main() {
   dork.
     Site("facebook.*").
-    Exclude((&dorkgen.GoogleSearch{}).
+    Exclude((dorkgen.NewGoogleSearch()).
       Site("facebook.com").
-      ToString())
+      String())
 
-  dork.ToString()
+  dork.String()
   // returns: site:facebook.* -site:facebook.com
   dork.ToURL()
   // returns: https://www.google.com/search?q=site%3Afacebook.%2A+-site%3Afacebook.com
