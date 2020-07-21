@@ -1,5 +1,3 @@
-# Dorkgen
-
 <div align="left">
   <a href="https://godoc.org/github.com/sundowndev/dorkgen">
     <img src="https://godoc.org/github.com/sundowndev/dorkgen?status.svg" alt="GoDoc">
@@ -21,11 +19,17 @@
   </a>
 </div>
 
-Dorkgen is a dork request generator for popular search engines such as Google, DuckDuckGo and Bing. [Learn more about Google Hacking](https://en.wikipedia.org/wiki/Google_hacking).
+# Dorkgen
 
-**For now, only Google is supported.**
+Dorkgen is a dork request generator for popular search engines such as Google Search, DuckDuckGo, Yahoo and Bing. [Learn more about Google Hacking](https://en.wikipedia.org/wiki/Google_hacking). The goal of this package is to provide simple interfaces to creates valid dork queries for various search engines.
+
+## Current status
+
+Version 1 is ongoing but the API is still instable. **For now, only Google is supported**, *v1.3* will introduce support for other search engines as well as a new design pattern.
 
 ## Install
+
+Fetch the module :
 
 ```bash
 go get github.com/sundowndev/dorkgen
