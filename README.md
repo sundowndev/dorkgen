@@ -25,7 +25,7 @@ Dorkgen is a dork request generator for popular search engines such as Google Se
 
 ## Current status
 
-Version 1 is ongoing but the API is still instable. **For now, only Google is supported**, *v1.3* will introduce support for other search engines as well as a new design pattern.
+Version 1 is ongoing but the API is still unstable. **For now, only Google is supported**, *v1.3* will introduce support for other search engines as well as a new design pattern.
 
 ## Install
 
@@ -37,7 +37,7 @@ go get github.com/sundowndev/dorkgen
 
 ## Usage
 
-[Try it in the Go playground](https://play.golang.org/p/ck_hEoX8cTK)
+**[Try it in the Go playground](https://play.golang.org/p/ck_hEoX8cTK)**
 
 #### Get started
 
@@ -61,10 +61,10 @@ func main() {
 ```go
 func main() {
   dork.Site("facebook.com").Or().Site("twitter.com").String()
-  // returns: site:facebook.com OR site:twitter.com
+  // returns: site:facebook.com | site:twitter.com
 
   dork.Intext("facebook").And().Intext("twitter").String()
-  // returns: intext:"facebook" AND intext:"twitter"
+  // returns: intext:"facebook" & intext:"twitter"
 }
 ```
 
@@ -94,7 +94,7 @@ func main() {
       Site("twitter.com")).
     Intext("wtf").
     String()
-  // returns: (site:facebook.com OR site:twitter.com) "wtf"
+  // returns: (site:facebook.com | site:twitter.com) "wtf"
 }
 ```
 
