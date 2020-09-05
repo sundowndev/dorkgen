@@ -123,7 +123,7 @@ func TestInit(t *testing.T) {
 			Site("twitter.com").
 			String()
 
-		assert.Equal(result, "site:facebook.com OR site:twitter.com", "they should be equal")
+		assert.Equal(result, "site:facebook.com | site:twitter.com", "they should be equal")
 	})
 
 	t.Run("should handle group tag correctly", func(t *testing.T) {
@@ -134,7 +134,7 @@ func TestInit(t *testing.T) {
 			Group((NewGoogleSearch()).Intext("1").Or().Intext("2")).
 			String()
 
-		assert.Equal(result, "site:linkedin.com (intext:\"1\" OR intext:\"2\")", "they should be equal")
+		assert.Equal(result, "site:linkedin.com (intext:\"1\" | intext:\"2\")", "they should be equal")
 	})
 
 	t.Run("should handle group tag correctly", func(t *testing.T) {
@@ -146,7 +146,7 @@ func TestInit(t *testing.T) {
 			Intitle("jordan").
 			String()
 
-		assert.Equal(result, "site:linkedin.com (intext:\"1\" OR intext:\"2\") intitle:\"jordan\"", "they should be equal")
+		assert.Equal(result, "site:linkedin.com (intext:\"1\" | intext:\"2\") intitle:\"jordan\"", "they should be equal")
 	})
 
 	t.Run("should return URL values", func(t *testing.T) {
@@ -159,7 +159,7 @@ func TestInit(t *testing.T) {
 			QueryValues()
 
 		assert.Equal(url.Values{
-			"q": []string{"site:linkedin.com (intext:\"1\" OR intext:\"2\") intitle:\"jordan\""},
+			"q": []string{"site:linkedin.com (intext:\"1\" | intext:\"2\") intitle:\"jordan\""},
 		}, result, "they should be equal")
 	})
 }

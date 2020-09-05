@@ -16,6 +16,8 @@ const (
 	excludeTag  = "-"
 	intitleTag  = "intitle:"
 	intextTag   = "intext:"
+	operatorOr  = "|"
+	operatorAnd = "+"
 )
 
 // GoogleSearch is the Google search implementation for Dorkgen
@@ -59,7 +61,7 @@ func (e *GoogleSearch) Site(site string) *GoogleSearch {
 
 // Or puts an OR operator in the request
 func (e *GoogleSearch) Or() *GoogleSearch {
-	e.tags = append(e.tags, "OR")
+	e.tags = append(e.tags, operatorOr)
 	return e
 }
 
