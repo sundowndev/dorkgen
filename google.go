@@ -108,8 +108,8 @@ func (e *GoogleSearch) Ext(ext string) *GoogleSearch {
 }
 
 // Exclude excludes some results.
-func (e *GoogleSearch) Exclude(value string) *GoogleSearch {
-	e.tags = append(e.tags, e.concat(excludeTag, value, false))
+func (e *GoogleSearch) Exclude(tags *GoogleSearch) *GoogleSearch {
+	e.tags = append(e.tags, e.concat(excludeTag, tags.String(), false))
 	return e
 }
 
@@ -122,5 +122,11 @@ func (e *GoogleSearch) Group(tags *GoogleSearch) *GoogleSearch {
 // Intitle searches for occurrences of keywords in title all or one.
 func (e *GoogleSearch) Intitle(value string) *GoogleSearch {
 	e.tags = append(e.tags, e.concat(intitleTag, value, true))
+	return e
+}
+
+// Plain allows you to add additional values as string without any kind of formatting.
+func (e *GoogleSearch) Plain(value string) *GoogleSearch {
+	e.tags = append(e.tags, value)
 	return e
 }

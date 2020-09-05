@@ -105,10 +105,10 @@ func TestInit(t *testing.T) {
 		dork = NewGoogleSearch()
 
 		result := dork.
-			Exclude("html").
-			Exclude("htm").
-			Exclude("php").
-			Exclude("md5sums").
+			Exclude(NewGoogleSearch().Plain("html")).
+			Exclude(NewGoogleSearch().Plain("htm")).
+			Exclude(NewGoogleSearch().Plain("php")).
+			Exclude(NewGoogleSearch().Plain("md5sums")).
 			String()
 
 		assert.Equal(result, "-html -htm -php -md5sums", "they should be equal")
