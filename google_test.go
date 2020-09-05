@@ -2,6 +2,7 @@ package dorkgen
 
 import (
 	"fmt"
+	"net/url"
 	"testing"
 
 	assertion "github.com/stretchr/testify/assert"
@@ -146,5 +147,19 @@ func TestInit(t *testing.T) {
 			String()
 
 		assert.Equal(result, "site:linkedin.com (intext:\"1\" OR intext:\"2\") intitle:\"jordan\"", "they should be equal")
+	})
+
+	t.Run("should return URL values", func(t *testing.T) {
+		dork = NewGoogleSearch()
+
+		result := dork.
+			Site("linkedin.com").
+			Group((NewGoogleSearch()).Intext("1").Or().Intext("2")).
+			Intitle("jordan").
+			QueryValues()
+
+		assert.Equal(url.Values{
+			"q": []string{"site:linkedin.com (intext:\"1\" OR intext:\"2\") intitle:\"jordan\""},
+		}, result, "they should be equal")
 	})
 }

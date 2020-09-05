@@ -32,16 +32,21 @@ func (e *GoogleSearch) String() string {
 	return strings.Join(e.tags, " ")
 }
 
-// ToURL converts tags to an encoded Google Search URL
-func (e *GoogleSearch) ToURL() string {
-	baseURL, _ := url.Parse(searchURL)
-
+// QueryValues returns search request as URL values
+func (e *GoogleSearch) QueryValues() url.Values {
 	tags := strings.Join(e.tags, " ")
 
 	params := url.Values{}
 	params.Add("q", tags)
 
-	baseURL.RawQuery = params.Encode()
+	return params
+}
+
+// ToURL converts tags to an encoded Google Search URL
+func (e *GoogleSearch) ToURL() string {
+	baseURL, _ := url.Parse(searchURL)
+
+	baseURL.RawQuery = e.QueryValues().Encode()
 
 	return baseURL.String()
 }
