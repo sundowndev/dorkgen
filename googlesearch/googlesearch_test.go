@@ -144,7 +144,7 @@ func TestInit(t *testing.T) {
 
 		result := dork.
 			Site("linkedin.com").
-			Group((googlesearch.New()).Intext("1").Or().Intext("2")).
+			Group(googlesearch.New().Intext("1").Or().Intext("2")).
 			String()
 
 		assert.Equal(result, "site:linkedin.com (intext:\"1\" | intext:\"2\")", "they should be equal")
@@ -155,7 +155,7 @@ func TestInit(t *testing.T) {
 
 		result := dork.
 			Site("linkedin.com").
-			Group((googlesearch.New()).Intext("1").Or().Intext("2")).
+			Group(googlesearch.New().Intext("1").Or().Intext("2")).
 			Intitle("jordan").
 			String()
 
@@ -167,7 +167,7 @@ func TestInit(t *testing.T) {
 
 		result := dork.
 			Site("linkedin.com").
-			Group((googlesearch.New()).Intext("1").Or().Intext("2")).
+			Group(googlesearch.New().Intext("1").Or().Intext("2")).
 			Intitle("jordan").
 			QueryValues()
 
