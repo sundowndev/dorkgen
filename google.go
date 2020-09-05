@@ -16,6 +16,8 @@ const (
 	excludeTag  = "-"
 	intitleTag  = "intitle:"
 	intextTag   = "intext:"
+	operatorOr  = "|"
+	operatorAnd = "+"
 )
 
 // GoogleSearch is the Google search implementation for Dorkgen
@@ -32,16 +34,21 @@ func (e *GoogleSearch) String() string {
 	return strings.Join(e.tags, " ")
 }
 
-// ToURL converts tags to an encoded Google Search URL
-func (e *GoogleSearch) ToURL() string {
-	baseURL, _ := url.Parse(searchURL)
-
+// QueryValues returns search request as URL values
+func (e *GoogleSearch) QueryValues() url.Values {
 	tags := strings.Join(e.tags, " ")
 
 	params := url.Values{}
 	params.Add("q", tags)
 
-	baseURL.RawQuery = params.Encode()
+	return params
+}
+
+// URL converts tags to an encoded Google Search URL
+func (e *GoogleSearch) URL() string {
+	baseURL, _ := url.Parse(searchURL)
+
+	baseURL.RawQuery = e.QueryValues().Encode()
 
 	return baseURL.String()
 }
@@ -54,7 +61,13 @@ func (e *GoogleSearch) Site(site string) *GoogleSearch {
 
 // Or puts an OR operator in the request
 func (e *GoogleSearch) Or() *GoogleSearch {
-	e.tags = append(e.tags, "OR")
+	e.tags = append(e.tags, operatorOr)
+	return e
+}
+
+// And puts an AND operator in the request
+func (e *GoogleSearch) And() *GoogleSearch {
+	e.tags = append(e.tags, operatorAnd)
 	return e
 }
 
@@ -95,8 +108,8 @@ func (e *GoogleSearch) Ext(ext string) *GoogleSearch {
 }
 
 // Exclude excludes some results.
-func (e *GoogleSearch) Exclude(value string) *GoogleSearch {
-	e.tags = append(e.tags, e.concat(excludeTag, value, false))
+func (e *GoogleSearch) Exclude(tags *GoogleSearch) *GoogleSearch {
+	e.tags = append(e.tags, e.concat(excludeTag, tags.String(), false))
 	return e
 }
 
@@ -109,5 +122,11 @@ func (e *GoogleSearch) Group(tags *GoogleSearch) *GoogleSearch {
 // Intitle searches for occurrences of keywords in title all or one.
 func (e *GoogleSearch) Intitle(value string) *GoogleSearch {
 	e.tags = append(e.tags, e.concat(intitleTag, value, true))
+	return e
+}
+
+// Plain allows you to add additional values as string without any kind of formatting.
+func (e *GoogleSearch) Plain(value string) *GoogleSearch {
+	e.tags = append(e.tags, value)
 	return e
 }

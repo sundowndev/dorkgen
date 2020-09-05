@@ -2,6 +2,7 @@ package dorkgen
 
 import (
 	"fmt"
+	"net/url"
 	"testing"
 
 	assertion "github.com/stretchr/testify/assert"
@@ -17,7 +18,7 @@ func TestInit(t *testing.T) {
 
 		result := dork.
 			Site("example.com").
-			ToURL()
+			URL()
 
 		assert.Equal(result, "https://www.google.com/search?q=site%3Aexample.com", "they should be equal")
 	})
@@ -104,16 +105,16 @@ func TestInit(t *testing.T) {
 		dork = NewGoogleSearch()
 
 		result := dork.
-			Exclude("html").
-			Exclude("htm").
-			Exclude("php").
-			Exclude("md5sums").
+			Exclude(NewGoogleSearch().Plain("html")).
+			Exclude(NewGoogleSearch().Plain("htm")).
+			Exclude(NewGoogleSearch().Plain("php")).
+			Exclude(NewGoogleSearch().Plain("md5sums")).
 			String()
 
 		assert.Equal(result, "-html -htm -php -md5sums", "they should be equal")
 	})
 
-	t.Run("should handle or tag correctly", func(t *testing.T) {
+	t.Run("should handle 'OR' tag correctly", func(t *testing.T) {
 		dork = NewGoogleSearch()
 
 		result := dork.
@@ -122,7 +123,19 @@ func TestInit(t *testing.T) {
 			Site("twitter.com").
 			String()
 
-		assert.Equal(result, "site:facebook.com OR site:twitter.com", "they should be equal")
+		assert.Equal(result, "site:facebook.com | site:twitter.com", "they should be equal")
+	})
+
+	t.Run("should handle 'AND' tag correctly", func(t *testing.T) {
+		dork = NewGoogleSearch()
+
+		result := dork.
+			Intitle("facebook").
+			And().
+			Intitle("twitter").
+			String()
+
+		assert.Equal(result, "intitle:\"facebook\" + intitle:\"twitter\"", "they should be equal")
 	})
 
 	t.Run("should handle group tag correctly", func(t *testing.T) {
@@ -133,7 +146,7 @@ func TestInit(t *testing.T) {
 			Group((NewGoogleSearch()).Intext("1").Or().Intext("2")).
 			String()
 
-		assert.Equal(result, "site:linkedin.com (intext:\"1\" OR intext:\"2\")", "they should be equal")
+		assert.Equal(result, "site:linkedin.com (intext:\"1\" | intext:\"2\")", "they should be equal")
 	})
 
 	t.Run("should handle group tag correctly", func(t *testing.T) {
@@ -145,6 +158,20 @@ func TestInit(t *testing.T) {
 			Intitle("jordan").
 			String()
 
-		assert.Equal(result, "site:linkedin.com (intext:\"1\" OR intext:\"2\") intitle:\"jordan\"", "they should be equal")
+		assert.Equal(result, "site:linkedin.com (intext:\"1\" | intext:\"2\") intitle:\"jordan\"", "they should be equal")
+	})
+
+	t.Run("should return URL values", func(t *testing.T) {
+		dork = NewGoogleSearch()
+
+		result := dork.
+			Site("linkedin.com").
+			Group((NewGoogleSearch()).Intext("1").Or().Intext("2")).
+			Intitle("jordan").
+			QueryValues()
+
+		assert.Equal(url.Values{
+			"q": []string{"site:linkedin.com (intext:\"1\" | intext:\"2\") intitle:\"jordan\""},
+		}, result, "they should be equal")
 	})
 }
