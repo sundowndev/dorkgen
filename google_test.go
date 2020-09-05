@@ -114,7 +114,7 @@ func TestInit(t *testing.T) {
 		assert.Equal(result, "-html -htm -php -md5sums", "they should be equal")
 	})
 
-	t.Run("should handle or tag correctly", func(t *testing.T) {
+	t.Run("should handle 'OR' tag correctly", func(t *testing.T) {
 		dork = NewGoogleSearch()
 
 		result := dork.
@@ -124,6 +124,18 @@ func TestInit(t *testing.T) {
 			String()
 
 		assert.Equal(result, "site:facebook.com | site:twitter.com", "they should be equal")
+	})
+
+	t.Run("should handle 'AND' tag correctly", func(t *testing.T) {
+		dork = NewGoogleSearch()
+
+		result := dork.
+			Intitle("facebook").
+			And().
+			Intitle("twitter").
+			String()
+
+		assert.Equal(result, "intitle:\"facebook\" + intitle:\"twitter\"", "they should be equal")
 	})
 
 	t.Run("should handle group tag correctly", func(t *testing.T) {

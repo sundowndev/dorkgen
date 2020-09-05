@@ -65,6 +65,12 @@ func (e *GoogleSearch) Or() *GoogleSearch {
 	return e
 }
 
+// And puts an AND operator in the request
+func (e *GoogleSearch) And() *GoogleSearch {
+	e.tags = append(e.tags, operatorAnd)
+	return e
+}
+
 // Intext searches for the occurrences of keywords all at once or one at a time.
 func (e *GoogleSearch) Intext(text string) *GoogleSearch {
 	e.tags = append(e.tags, e.concat(intextTag, text, true))
