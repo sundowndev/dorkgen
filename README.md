@@ -25,7 +25,7 @@ Dorkgen is a dork request generator for popular search engines such as Google Se
 
 ## Current status
 
-Version 1 is ongoing but the API is still unstable. **For now, only Google is supported**, *v1.3* will introduce support for other search engines as well as a new design pattern.
+Version 1 is ongoing, but the API is still unstable. **For now, only Google's supported**, *v1.3* will introduce support for other search engines as well as a new design pattern.
 
 ## Install
 
@@ -37,7 +37,7 @@ go get github.com/sundowndev/dorkgen
 
 ## Usage
 
-**[Try it in the Go playground](https://play.golang.org/p/ck_hEoX8cTK)**
+**[Try it in the Go playground](https://play.golang.org/p/EoaiowZTr0i)**
 
 #### Get started
 
