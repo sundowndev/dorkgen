@@ -42,8 +42,8 @@ func (e *GoogleSearch) QueryValues() url.Values {
 	return params
 }
 
-// ToURL converts tags to an encoded Google Search URL
-func (e *GoogleSearch) ToURL() string {
+// URL converts tags to an encoded Google Search URL
+func (e *GoogleSearch) URL() string {
 	baseURL, _ := url.Parse(searchURL)
 
 	baseURL.RawQuery = e.QueryValues().Encode()

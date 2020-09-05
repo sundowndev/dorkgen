@@ -18,7 +18,7 @@ func TestInit(t *testing.T) {
 
 		result := dork.
 			Site("example.com").
-			ToURL()
+			URL()
 
 		assert.Equal(result, "https://www.google.com/search?q=site%3Aexample.com", "they should be equal")
 	})
