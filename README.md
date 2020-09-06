@@ -44,7 +44,7 @@ go get github.com/sundowndev/dorkgen
 
 ## Usage
 
-**[Try it in the Go playground](https://play.golang.org/p/EoaiowZTr0i)**
+**[Try it in the Go playground](https://play.golang.org/p/H_sCs_CB10A)**
 
 #### Get started
 
@@ -59,7 +59,7 @@ func main() {
   // dork := dorkgen.NewBingSearch()
   // dork := dorkgen.NewYahooSearch()
 
-  dork.Site("example.com").Intext("text").String()
+  dork.Site("example.com").InText("text").String()
   // returns: site:example.com intext:"text"
 }
 ```
@@ -71,7 +71,7 @@ func main() {
   dork.Site("facebook.com").Or().Site("twitter.com").String()
   // returns: site:facebook.com | site:twitter.com
 
-  dork.Intext("facebook").And().Intext("twitter").String()
+  dork.InText("facebook").And().InText("twitter").String()
   // returns: intext:"facebook" + intext:"twitter"
 }
 ```
@@ -86,7 +86,7 @@ func main() {
       String()).
     Site("example.*").
     Or().
-    Intext("text")
+    InText("text")
   // returns: -site:example.com site:example.* | "text"
 }
 ```
@@ -100,7 +100,7 @@ func main() {
       Site("facebook.com").
       Or().
       Site("twitter.com")).
-    Intext("wtf").
+    InText("wtf").
     String()
   // returns: (site:facebook.com | site:twitter.com) "wtf"
 }
