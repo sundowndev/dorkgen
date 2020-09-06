@@ -29,8 +29,8 @@ Version 1 is ongoing, but the API is still unstable. **See below table for suppo
 
 | Search engine        | Implementation status |
 |---------------|:-----------------------:|
-| [Google Search](https://godoc.org/github.com/sundowndev/dorkgen/googlesearch) | ✔️      |
-| [DuckDuckGo](https://godoc.org/github.com/sundowndev/dorkgen/duckduckgo)    | ✔️              |
+| [Google Search](https://godoc.org/github.com/sundowndev/dorkgen/googlesearch) | Partial      |
+| [DuckDuckGo](https://godoc.org/github.com/sundowndev/dorkgen/duckduckgo)    | Complete              |
 | Yahoo Search  | WIP                   |
 | Bing Search   | WIP                   |
 
