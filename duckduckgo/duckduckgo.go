@@ -142,7 +142,7 @@ func (d *DuckDuckGo) AllInURL(value string) *DuckDuckGo {
 // An iso location code is a short code for a country for example, Egypt is eg and USA is us.
 // https://en.wikipedia.org/wiki/ISO_3166-1
 func (d *DuckDuckGo) Location(isoCode string) *DuckDuckGo {
-	d.tags = append(d.tags, d.concat(locationTag, isoCode, false))
+	d.tags = append(d.tags, d.concat(locationTag, isoCode, true))
 	return d
 }
 
@@ -159,6 +159,7 @@ func (d *DuckDuckGo) HasFeed(url string) *DuckDuckGo {
 }
 
 // Language returns websites that match the search term in a specified language.
+// See https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes for a complete list of ISO 639-1 codes you can use.
 func (d *DuckDuckGo) Language(lang string) *DuckDuckGo {
 	d.tags = append(d.tags, d.concat(languageTag, lang, false))
 	return d

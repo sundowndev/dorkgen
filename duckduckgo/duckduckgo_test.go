@@ -72,65 +72,65 @@ func TestInit(t *testing.T) {
 		assert.Equal(result, "filetype:\"pdf\"", "they should be equal")
 	})
 
-	//t.Run("should handle AllInURL tag correctly", func(t *testing.T) {
-	//	dork = duckduckgo.New()
-	//
-	//	result := dork.
-	//		Cache("www.google.com").
-	//		String()
-	//
-	//	assert.Equal(result, "cache:\"www.google.com\"", "they should be equal")
-	//})
+	t.Run("should handle AllInURL tag correctly", func(t *testing.T) {
+		dork = duckduckgo.New()
 
-	//t.Run("should handle Location tag correctly", func(t *testing.T) {
-	//	dork = duckduckgo.New()
-	//
-	//	result := dork.
-	//		Related("www.google.com").
-	//		String()
-	//
-	//	assert.Equal(result, "related:\"www.google.com\"", "they should be equal")
-	//})
+		result := dork.
+			AllInURL("test").
+			String()
 
-	//t.Run("should handle Feed tag correctly", func(t *testing.T) {
-	//	dork = duckduckgo.New()
-	//
-	//	result := dork.
-	//		Related("www.google.com").
-	//		String()
-	//
-	//	assert.Equal(result, "related:\"www.google.com\"", "they should be equal")
-	//})
+		assert.Equal(result, "allinurl:\"test\"", "they should be equal")
+	})
 
-	//t.Run("should handle HasFeed tag correctly", func(t *testing.T) {
-	//	dork = duckduckgo.New()
-	//
-	//	result := dork.
-	//		Related("www.google.com").
-	//		String()
-	//
-	//	assert.Equal(result, "related:\"www.google.com\"", "they should be equal")
-	//})
+	t.Run("should handle Location tag correctly", func(t *testing.T) {
+		dork = duckduckgo.New()
 
-	//t.Run("should handle Language tag correctly", func(t *testing.T) {
-	//	dork = duckduckgo.New()
-	//
-	//	result := dork.
-	//		Related("www.google.com").
-	//		String()
-	//
-	//	assert.Equal(result, "related:\"www.google.com\"", "they should be equal")
-	//})
+		result := dork.
+			Location("fr").
+			String()
 
-	//t.Run("should handle AllInTitle tag correctly", func(t *testing.T) {
-	//	dork = duckduckgo.New()
-	//
-	//	result := dork.
-	//		Related("www.google.com").
-	//		String()
-	//
-	//	assert.Equal(result, "related:\"www.google.com\"", "they should be equal")
-	//})
+		assert.Equal(result, "region:\"fr\"", "they should be equal")
+	})
+
+	t.Run("should handle Feed tag correctly", func(t *testing.T) {
+		dork = duckduckgo.New()
+
+		result := dork.
+			Feed("rss").
+			String()
+
+		assert.Equal(result, "feed:rss", "they should be equal")
+	})
+
+	t.Run("should handle HasFeed tag correctly", func(t *testing.T) {
+		dork = duckduckgo.New()
+
+		result := dork.
+			HasFeed("https://sundaypapers.libsyn.com/rss").
+			String()
+
+		assert.Equal(result, "hasfeed:\"https://sundaypapers.libsyn.com/rss\"", "they should be equal")
+	})
+
+	t.Run("should handle Language tag correctly", func(t *testing.T) {
+		dork = duckduckgo.New()
+
+		result := dork.
+			Language("zh").
+			String()
+
+		assert.Equal(result, "language:zh", "they should be equal")
+	})
+
+	t.Run("should handle AllInTitle tag correctly", func(t *testing.T) {
+		dork = duckduckgo.New()
+
+		result := dork.
+			AllInTitle("test").
+			String()
+
+		assert.Equal(result, "allintitle:\"test\"", "they should be equal")
+	})
 
 	t.Run("should handle ext tag correctly", func(t *testing.T) {
 		dork = duckduckgo.New()
