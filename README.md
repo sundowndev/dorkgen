@@ -25,7 +25,14 @@ Dorkgen is a dork request generator for popular search engines such as Google Se
 
 ## Current status
 
-Version 1 is ongoing, but the API is still unstable. **For now, only Google's supported**, *v1.3* will introduce support for other search engines as well as a new design pattern.
+Version 1 is ongoing, but the API is still unstable. **See below table for supported search engines**.
+
+| Search engine        | Implementation status |
+|---------------|:-----------------------:|
+| [Google Search](https://godoc.org/github.com/sundowndev/dorkgen/googlesearch) | ✔️      |
+| [DuckDuckGo](https://godoc.org/github.com/sundowndev/dorkgen/duckduckgo)    | ✔️              |
+| Yahoo Search  | WIP                   |
+| Bing Search   | WIP                   |
 
 ## Install
 
@@ -49,7 +56,8 @@ import "github.com/sundowndev/dorkgen"
 func main() {
   dork := dorkgen.NewGoogleSearch()
   // dork := dorkgen.NewDuckDuckGo()
-  // dork := dorkgen.NewBing()
+  // dork := dorkgen.NewBingSearch()
+  // dork := dorkgen.NewYahooSearch()
 
   dork.Site("example.com").Intext("text").String()
   // returns: site:example.com intext:"text"
@@ -64,7 +72,7 @@ func main() {
   // returns: site:facebook.com | site:twitter.com
 
   dork.Intext("facebook").And().Intext("twitter").String()
-  // returns: intext:"facebook" & intext:"twitter"
+  // returns: intext:"facebook" + intext:"twitter"
 }
 ```
 
@@ -79,7 +87,7 @@ func main() {
     Site("example.*").
     Or().
     Intext("text")
-  // returns: -site:example.com site:example.* OR "text"
+  // returns: -site:example.com site:example.* | "text"
 }
 ```
 
