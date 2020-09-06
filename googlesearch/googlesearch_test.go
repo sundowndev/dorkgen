@@ -46,7 +46,7 @@ func TestInit(t *testing.T) {
 		dork = googlesearch.New()
 
 		result := dork.
-			Intext("text").
+			InText("text").
 			String()
 
 		assert.Equal(result, "intext:\"text\"", "they should be equal")
@@ -56,7 +56,7 @@ func TestInit(t *testing.T) {
 		dork = googlesearch.New()
 
 		result := dork.
-			Inurl("index.php").
+			InURL("index.php").
 			String()
 
 		assert.Equal(result, "inurl:\"index.php\"", "they should be equal")
@@ -66,7 +66,7 @@ func TestInit(t *testing.T) {
 		dork = googlesearch.New()
 
 		result := dork.
-			Filetype("pdf").
+			FileType("pdf").
 			String()
 
 		assert.Equal(result, "filetype:\"pdf\"", "they should be equal")
@@ -131,9 +131,9 @@ func TestInit(t *testing.T) {
 		dork = googlesearch.New()
 
 		result := dork.
-			Intitle("facebook").
+			InTitle("facebook").
 			And().
-			Intitle("twitter").
+			InTitle("twitter").
 			String()
 
 		assert.Equal(result, "intitle:\"facebook\" + intitle:\"twitter\"", "they should be equal")
@@ -144,7 +144,7 @@ func TestInit(t *testing.T) {
 
 		result := dork.
 			Site("linkedin.com").
-			Group(googlesearch.New().Intext("1").Or().Intext("2")).
+			Group(googlesearch.New().InText("1").Or().InText("2")).
 			String()
 
 		assert.Equal(result, "site:linkedin.com (intext:\"1\" | intext:\"2\")", "they should be equal")
@@ -155,8 +155,8 @@ func TestInit(t *testing.T) {
 
 		result := dork.
 			Site("linkedin.com").
-			Group(googlesearch.New().Intext("1").Or().Intext("2")).
-			Intitle("jordan").
+			Group(googlesearch.New().InText("1").Or().InText("2")).
+			InTitle("jordan").
 			String()
 
 		assert.Equal(result, "site:linkedin.com (intext:\"1\" | intext:\"2\") intitle:\"jordan\"", "they should be equal")
@@ -167,8 +167,8 @@ func TestInit(t *testing.T) {
 
 		result := dork.
 			Site("linkedin.com").
-			Group(googlesearch.New().Intext("1").Or().Intext("2")).
-			Intitle("jordan").
+			Group(googlesearch.New().InText("1").Or().InText("2")).
+			InTitle("jordan").
 			QueryValues()
 
 		assert.Equal(url.Values{
