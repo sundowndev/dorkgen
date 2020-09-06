@@ -30,7 +30,7 @@ func New() *GoogleSearch {
 	return &GoogleSearch{}
 }
 
-func (_ *GoogleSearch) concat(tag string, value string, quotes bool) string {
+func (e *GoogleSearch) join(tag string, value string, quotes bool) string {
 	if quotes {
 		return tag + "\"" + value + "\""
 	}
@@ -39,13 +39,13 @@ func (_ *GoogleSearch) concat(tag string, value string, quotes bool) string {
 }
 
 // String converts all tags to a single request
-func (g *GoogleSearch) String() string {
-	return strings.Join(g.tags, " ")
+func (e *GoogleSearch) String() string {
+	return strings.Join(e.tags, " ")
 }
 
 // QueryValues returns search request as URL values
-func (g *GoogleSearch) QueryValues() url.Values {
-	tags := strings.Join(g.tags, " ")
+func (e *GoogleSearch) QueryValues() url.Values {
+	tags := strings.Join(e.tags, " ")
 
 	params := url.Values{}
 	params.Add("q", tags)
@@ -54,88 +54,88 @@ func (g *GoogleSearch) QueryValues() url.Values {
 }
 
 // URL converts tags to an encoded Google Search URL
-func (g *GoogleSearch) URL() string {
+func (e *GoogleSearch) URL() string {
 	baseURL, _ := url.Parse(searchURL)
 
-	baseURL.RawQuery = g.QueryValues().Encode()
+	baseURL.RawQuery = e.QueryValues().Encode()
 
 	return baseURL.String()
 }
 
 // Site specifically searches that particular site and lists all the results for that site.
-func (g *GoogleSearch) Site(site string) *GoogleSearch {
-	g.tags = append(g.tags, g.concat(siteTag, site, false))
-	return g
+func (e *GoogleSearch) Site(site string) *GoogleSearch {
+	e.tags = append(e.tags, e.join(siteTag, site, false))
+	return e
 }
 
 // Or puts an OR operator in the request
-func (g *GoogleSearch) Or() *GoogleSearch {
-	g.tags = append(g.tags, operatorOr)
-	return g
+func (e *GoogleSearch) Or() *GoogleSearch {
+	e.tags = append(e.tags, operatorOr)
+	return e
 }
 
 // And puts an AND operator in the request
-func (g *GoogleSearch) And() *GoogleSearch {
-	g.tags = append(g.tags, operatorAnd)
-	return g
+func (e *GoogleSearch) And() *GoogleSearch {
+	e.tags = append(e.tags, operatorAnd)
+	return e
 }
 
-// Intext searches for the occurrences of keywords all at once or one at a time.
-func (g *GoogleSearch) Intext(text string) *GoogleSearch {
-	g.tags = append(g.tags, g.concat(intextTag, text, true))
-	return g
+// InText searches for the occurrences of keywords all at once or one at a time.
+func (e *GoogleSearch) InText(text string) *GoogleSearch {
+	e.tags = append(e.tags, e.join(intextTag, text, true))
+	return e
 }
 
-// Inurl searches for a URL matching one of the keywords.
-func (g *GoogleSearch) Inurl(url string) *GoogleSearch {
-	g.tags = append(g.tags, g.concat(urlTag, url, true))
-	return g
+// InURL searches for a URL matching one of the keywords.
+func (e *GoogleSearch) InURL(url string) *GoogleSearch {
+	e.tags = append(e.tags, e.join(urlTag, url, true))
+	return e
 }
 
-// Filetype searches for a particular filetype mentioned in the query.
-func (g *GoogleSearch) Filetype(filetype string) *GoogleSearch {
-	g.tags = append(g.tags, g.concat(filetypeTag, filetype, true))
-	return g
+// FileType searches for a particular filetype mentioned in the query.
+func (e *GoogleSearch) FileType(filetype string) *GoogleSearch {
+	e.tags = append(e.tags, e.join(filetypeTag, filetype, true))
+	return e
 }
 
 // Cache shows the version of the web page that Google has in its cache.
-func (g *GoogleSearch) Cache(url string) *GoogleSearch {
-	g.tags = append(g.tags, g.concat(cacheTag, url, true))
-	return g
+func (e *GoogleSearch) Cache(url string) *GoogleSearch {
+	e.tags = append(e.tags, e.join(cacheTag, url, true))
+	return e
 }
 
 // Related list web pages that are “similar” to a specified web page.
-func (g *GoogleSearch) Related(url string) *GoogleSearch {
-	g.tags = append(g.tags, g.concat(relatedTag, url, true))
-	return g
+func (e *GoogleSearch) Related(url string) *GoogleSearch {
+	e.tags = append(e.tags, e.join(relatedTag, url, true))
+	return e
 }
 
 // Ext searches for a particular file extension mentioned in the query.
-func (g *GoogleSearch) Ext(ext string) *GoogleSearch {
-	g.tags = append(g.tags, g.concat(extTag, ext, false))
-	return g
+func (e *GoogleSearch) Ext(ext string) *GoogleSearch {
+	e.tags = append(e.tags, e.join(extTag, ext, false))
+	return e
 }
 
 // Exclude excludes some results.
-func (g *GoogleSearch) Exclude(tags *GoogleSearch) *GoogleSearch {
-	g.tags = append(g.tags, g.concat(excludeTag, tags.String(), false))
-	return g
+func (e *GoogleSearch) Exclude(tags *GoogleSearch) *GoogleSearch {
+	e.tags = append(e.tags, e.join(excludeTag, tags.String(), false))
+	return e
 }
 
 // Group isolate tags between parentheses
-func (g *GoogleSearch) Group(tags *GoogleSearch) *GoogleSearch {
-	g.tags = append(g.tags, "("+tags.String()+")")
-	return g
+func (e *GoogleSearch) Group(tags *GoogleSearch) *GoogleSearch {
+	e.tags = append(e.tags, "("+tags.String()+")")
+	return e
 }
 
-// Intitle searches for occurrences of keywords in title all or one.
-func (g *GoogleSearch) Intitle(value string) *GoogleSearch {
-	g.tags = append(g.tags, g.concat(intitleTag, value, true))
-	return g
+// InTitle searches for occurrences of keywords in title all or one.
+func (e *GoogleSearch) InTitle(value string) *GoogleSearch {
+	e.tags = append(e.tags, e.join(intitleTag, value, true))
+	return e
 }
 
 // Plain allows you to add additional values as string without any kind of formatting.
-func (g *GoogleSearch) Plain(value string) *GoogleSearch {
-	g.tags = append(g.tags, value)
-	return g
+func (e *GoogleSearch) Plain(value string) *GoogleSearch {
+	e.tags = append(e.tags, value)
+	return e
 }
