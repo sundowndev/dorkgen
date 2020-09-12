@@ -6,18 +6,24 @@ import (
 )
 
 const (
-	searchURL   = "https://www.google.com/search"
-	siteTag     = "site:"
-	urlTag      = "inurl:"
-	filetypeTag = "filetype:"
-	cacheTag    = "cache:"
-	relatedTag  = "related:"
-	extTag      = "ext:"
-	excludeTag  = "-"
-	intitleTag  = "intitle:"
-	intextTag   = "intext:"
-	operatorOr  = "|"
-	operatorAnd = "+"
+	searchURL    = "https://www.google.com/search"
+	siteTag      = "site:"
+	urlTag       = "inurl:"
+	filetypeTag  = "filetype:"
+	cacheTag     = "cache:"
+	relatedTag   = "related:"
+	extTag       = "ext:"
+	excludeTag   = "-"
+	intitleTag   = "intitle:"
+	intextTag    = "intext:"
+	operatorOr   = "|"
+	operatorAnd  = "+"
+	bookTag      = "book:"
+	ipTag        = "ip:"
+	mapsTag      = "maps:"
+	allintextTag = "allintext:"
+	infoTag      = "info:"
+	inanchorTag  = "inanchor:"
 )
 
 // GoogleSearch is the Google search implementation for Dorkgen
@@ -137,5 +143,35 @@ func (e *GoogleSearch) InTitle(value string) *GoogleSearch {
 // Plain allows you to add additional values as string without any kind of formatting.
 func (e *GoogleSearch) Plain(value string) *GoogleSearch {
 	e.tags = append(e.tags, value)
+	return e
+}
+
+// Book searches for book titles related to keywords.
+func (e *GoogleSearch) Book(keyword string) *GoogleSearch {
+	e.tags = append(e.tags, e.join(bookTag, keyword, true))
+	return e
+}
+
+// Maps searches for maps related to keywords.
+func (e *GoogleSearch) Maps(location string) *GoogleSearch {
+	e.tags = append(e.tags, e.join(mapsTag, location, false))
+	return e
+}
+
+// AllInText searches text of page.
+func (e *GoogleSearch) AllInText(text string) *GoogleSearch {
+	e.tags = append(e.tags, e.join(allintextTag, text, true))
+	return e
+}
+
+// Info presents some information that Google has about a web page, including similar pages, the cached version of the page, and sites linking to the page.
+func (e *GoogleSearch) Info(url string) *GoogleSearch {
+	e.tags = append(e.tags, e.join(infoTag, url, true))
+	return e
+}
+
+// InAnchor search link anchor text.
+func (e *GoogleSearch) InAnchor(text string) *GoogleSearch {
+	e.tags = append(e.tags, e.join(inanchorTag, text, true))
 	return e
 }
