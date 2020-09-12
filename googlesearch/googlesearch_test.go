@@ -186,16 +186,6 @@ func TestInit(t *testing.T) {
 		assert.Equal("book:\"test\"", result, "they should be equal")
 	})
 
-	t.Run("should use ip tag", func(t *testing.T) {
-		dork = googlesearch.New()
-
-		result := dork.
-			IP("172.217.19.238").
-			String()
-
-		assert.Equal("ip:172.217.19.238", result, "they should be equal")
-	})
-
 	t.Run("should use maps tag", func(t *testing.T) {
 		dork = googlesearch.New()
 

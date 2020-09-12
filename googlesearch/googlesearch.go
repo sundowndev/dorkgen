@@ -152,12 +152,6 @@ func (e *GoogleSearch) Book(keyword string) *GoogleSearch {
 	return e
 }
 
-// IP finds sites hosted by a specific ip address.
-func (e *GoogleSearch) IP(address string) *GoogleSearch {
-	e.tags = append(e.tags, e.join(ipTag, address, false))
-	return e
-}
-
 // Maps searches for maps related to keywords.
 func (e *GoogleSearch) Maps(location string) *GoogleSearch {
 	e.tags = append(e.tags, e.join(mapsTag, location, false))
