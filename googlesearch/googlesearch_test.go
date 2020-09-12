@@ -175,4 +175,64 @@ func TestInit(t *testing.T) {
 			"q": []string{"site:linkedin.com (intext:\"1\" | intext:\"2\") intitle:\"jordan\""},
 		}, result, "they should be equal")
 	})
+
+	t.Run("should use book tag", func(t *testing.T) {
+		dork = googlesearch.New()
+
+		result := dork.
+			Book("test").
+			String()
+
+		assert.Equal("book:\"test\"", result, "they should be equal")
+	})
+
+	t.Run("should use ip tag", func(t *testing.T) {
+		dork = googlesearch.New()
+
+		result := dork.
+			IP("172.217.19.238").
+			String()
+
+		assert.Equal("ip:172.217.19.238", result, "they should be equal")
+	})
+
+	t.Run("should use maps tag", func(t *testing.T) {
+		dork = googlesearch.New()
+
+		result := dork.
+			Maps("france").
+			String()
+
+		assert.Equal("maps:france", result, "they should be equal")
+	})
+
+	t.Run("should use allintext tag", func(t *testing.T) {
+		dork = googlesearch.New()
+
+		result := dork.
+			AllInText("test").
+			String()
+
+		assert.Equal("allintext:\"test\"", result, "they should be equal")
+	})
+
+	t.Run("should use info tag", func(t *testing.T) {
+		dork = googlesearch.New()
+
+		result := dork.
+			Info("https://google.com/").
+			String()
+
+		assert.Equal("info:\"https://google.com/\"", result, "they should be equal")
+	})
+
+	t.Run("should use inanchor tag", func(t *testing.T) {
+		dork = googlesearch.New()
+
+		result := dork.
+			InAnchor("test").
+			String()
+
+		assert.Equal("inanchor:\"test\"", result, "they should be equal")
+	})
 }
