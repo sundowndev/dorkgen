@@ -21,7 +21,7 @@
 
 # Dorkgen
 
-Dorkgen is a dork request generator for popular search engines such as Google Search, DuckDuckGo, Yahoo and Bing. [Learn more about Google Hacking](https://en.wikipedia.org/wiki/Google_hacking). The goal of this package is to provide simple interfaces to creates valid dork queries for various search engines.
+Dorkgen is a dork query wrapper for popular search engines such as Google Search, DuckDuckGo, Yahoo and Bing. [Learn more about Google Hacking](https://en.wikipedia.org/wiki/Google_hacking). The goal of this package is to provide simple interfaces to creates valid dork queries for various search engines. This library was initially created for **[PhoneInfoga](https://github.com/sundowndev/PhoneInfoga)**.
 
 ## Current status
 
