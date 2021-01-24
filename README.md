@@ -1,7 +1,5 @@
 <div align="left">
-  <a href="https://godoc.org/github.com/sundowndev/dorkgen">
-    <img src="https://godoc.org/github.com/sundowndev/dorkgen?status.svg" alt="GoDoc">
-  </a>
+  <a href="https://pkg.go.dev/github.com/sundowndev/dorkgen"><img src="https://pkg.go.dev/badge/github.com/sundowndev/dorkgen.svg" alt="Go Reference"></a>
   <a href="https://github.com/sundowndev/dorkgen/actions">
     <img src="https://img.shields.io/endpoint.svg?url=https://actions-badge.atrox.dev/sundowndev/dorkgen/badge?ref=master" alt="build status" />
   </a>
@@ -25,12 +23,12 @@ Dorkgen is a dork query wrapper for popular search engines such as Google Search
 
 ## Current status
 
-Version 1 is ongoing, but the API is still unstable. **See below table for supported search engines**.
+Version 1 is ongoing, but the API is still not fixed. **See below table for supported search engines and status of their implementation**.
 
 | Search engine        | Implementation status |
 |---------------|:-----------------------:|
-| [Google Search](https://godoc.org/github.com/sundowndev/dorkgen/googlesearch) | Complete      |
-| [DuckDuckGo](https://godoc.org/github.com/sundowndev/dorkgen/duckduckgo)    | Complete              |
+| [Google Search](https://godoc.org/github.com/sundowndev/dorkgen/googlesearch) | Stable      |
+| [DuckDuckGo](https://godoc.org/github.com/sundowndev/dorkgen/duckduckgo)    | Stable              |
 | Yahoo Search  | WIP                   |
 | Bing Search   | WIP                   |
 
@@ -44,7 +42,7 @@ go get github.com/sundowndev/dorkgen
 
 ## Usage
 
-**[Try it in the Go playground](https://play.golang.org/p/H_sCs_CB10A)**
+**[Try it in the Go playground](https://play.golang.org/p/QKHG2cZe4iK)**
 
 #### Get started
 
@@ -81,9 +79,7 @@ func main() {
 ```go
 func main() {
   dork.
-    Exclude((dorkgen.NewGoogleSearch()).
-      Site("example.com").
-      String()).
+    Exclude(dorkgen.NewGoogleSearch().Site("example.com")).
     Site("example.*").
     Or().
     InText("text")
@@ -96,7 +92,7 @@ func main() {
 ```go
 func main() {
   dork.
-    Group((dorkgen.NewGoogleSearch()).
+    Group(dorkgen.NewGoogleSearch().
       Site("facebook.com").
       Or().
       Site("twitter.com")).
@@ -112,12 +108,11 @@ func main() {
 func main() {
   dork.
     Site("facebook.*").
-    Exclude((dorkgen.NewGoogleSearch()).
-      Site("facebook.com").
-      String())
+    Exclude(dorkgen.NewGoogleSearch().Site("facebook.com"))
 
   dork.String()
   // returns: site:facebook.* -site:facebook.com
+
   dork.ToURL()
   // returns: https://www.google.com/search?q=site%3Afacebook.%2A+-site%3Afacebook.com
 }
