@@ -27,8 +27,8 @@ Version 1 is ongoing, but the API is still not fixed. **See below table for supp
 
 | Search engine        | Implementation status |
 |---------------|:-----------------------:|
-| [Google Search](https://godoc.org/github.com/sundowndev/dorkgen/googlesearch) | Stable      |
-| [DuckDuckGo](https://godoc.org/github.com/sundowndev/dorkgen/duckduckgo)    | Stable              |
+| [Google Search](https://pkg.go.dev/github.com/sundowndev/dorkgen/googlesearch) | Stable      |
+| [DuckDuckGo](https://pkg.go.dev/github.com/sundowndev/dorkgen/duckduckgo)    | Stable              |
 | Yahoo Search  | WIP                   |
 | Bing Search   | WIP                   |
 
