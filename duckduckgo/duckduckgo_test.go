@@ -21,7 +21,7 @@ func TestInit(t *testing.T) {
 			Site("example.com").
 			URL()
 
-		assert.Equal(result, "https://www.google.com/search?q=site%3Aexample.com", "they should be equal")
+		assert.Equal(result, "https://duckduckgo.com/?q=site%3Aexample.com", "they should be equal")
 	})
 
 	t.Run("should convert to string correctly", func(t *testing.T) {

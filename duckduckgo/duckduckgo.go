@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	searchURL     = "https://www.google.com/search"
+	searchURL     = "https://duckduckgo.com/"
 	siteTag       = "site:"
 	urlTag        = "inurl:"
 	filetypeTag   = "filetype:"
